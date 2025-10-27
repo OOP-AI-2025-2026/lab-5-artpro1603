@@ -38,26 +38,23 @@ public class MainFrame extends JFrame implements ActionListener {
 
     private GameShape generateShape() {
 
-        // TODO: написати логіку методу
-
-        // Метод повертає об'єкт ігрової фігури (камінь, ножиці чи папір)
-        // випадковим чином
-
         int random = new Random().nextInt(3);
 
-        return new GameShape(); // TODO: змініть на об'єкт потрібної фігури
+        if (random == 0) return new Rock();
+        else if (random == 1) return new Paper();
+        else return new Scissors();
+
     }
 
     private int checkWinner(GameShape player, GameShape computer) {
-
-        // Метод отримує клас фігури гравця і комп'ютера за допомогою оператора instanceof
-        // Метод повертає 1 якщо переміг гравець
-        // Метод повертає 0 якщо нічия (обидві фігури однакові)
-        // Метод повертає -1 якщо переміг комп'ютер
-
-        // TODO: написати логіку методу
-
-        return 0;
+        // Перемога гравця
+        if (player instanceof Rock && computer instanceof Scissors) return 1;
+        if (player instanceof Scissors && computer instanceof Paper) return 1;
+        if (player instanceof Paper && computer instanceof Rock) return 1;
+        // Нічия
+        if (player.getClass() == computer.getClass()) return 0;
+        // Перемога комп'ютера
+        return -1;
     }
 
     @Override
@@ -69,13 +66,13 @@ public class MainFrame extends JFrame implements ActionListener {
         // Визначаємо, на яку кнопку натиснув гравець
         switch (e.getActionCommand()) {
             case "rock":
-                // присвоїти playerShape об'єкт відповідного класу
+                playerShape = new Rock();
                 break;
             case "paper":
-                // присвоїти playerShape об'єкт відповідного класу
+                playerShape = new Paper();
                 break;
             case "scissors":
-                // присвоїти playerShape об'єкт відповідного класу
+                playerShape = new Scissors();
                 break;
         }
 
